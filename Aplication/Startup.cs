@@ -8,12 +8,14 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using Aplication.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Dominio.UsuarioModel;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Dados.Usuario;
+using Dominio.UsuarioModel.Repository;
+using Servico.Usuario;
 
 namespace Aplication
 {
@@ -29,6 +31,9 @@ namespace Aplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IUsuarioRepository, ApplicationDbContext>();
+            services.AddTransient<IUsuarioService, UsuarioService>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
 
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
