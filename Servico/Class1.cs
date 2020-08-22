@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Servicos
+namespace Servico
 {
     public class Class1
     {
