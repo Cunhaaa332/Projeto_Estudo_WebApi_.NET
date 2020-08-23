@@ -1,4 +1,4 @@
-﻿using Dominio.UsuarioModel.Repository;
+﻿using Dominio.Usuario.Repository;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;

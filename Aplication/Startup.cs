@@ -11,11 +11,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Dominio.UsuarioModel;
+using Dominio.Usuario;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Dados.Usuario;
-using Dominio.UsuarioModel.Repository;
+using Dominio.Usuario.Repository;
 using Servico.Usuario;
+using Dominio;
 
 namespace Aplication
 {
@@ -32,14 +33,17 @@ namespace Aplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUsuarioRepository, ApplicationDbContext>();
+            services.AddTransient<IUserStore<UsuarioModel>, UsuarioRepository>();
+            services.AddTransient<IRoleStore<Perfil>, PerfilRepository>();
+            services.AddTransient<IUsuarioIdentityManager, UsuarioIdentityManager>();
+
             services.AddTransient<IUsuarioService, UsuarioService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
 
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<UsuarioModel, IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>()
+            services.AddIdentity<UsuarioModel, Perfil>()
             .AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options =>

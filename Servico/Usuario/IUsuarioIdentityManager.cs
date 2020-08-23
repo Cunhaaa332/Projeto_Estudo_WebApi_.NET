@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Dominio.Usuario.Repository
+namespace Servico.Usuario
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioIdentityManager
     {
     }
 }
