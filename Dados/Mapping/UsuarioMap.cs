@@ -19,6 +19,8 @@ namespace Dados.Mapping
             builder.Property(x => x.Nome).IsRequired().HasMaxLength(150);
             builder.Property(x => x.Senha).IsRequired().HasMaxLength(150);
             builder.Property(x => x.DtBirthday).IsRequired();
+
+            builder.HasMany(x => x.Perfis).WithOne();
         }
     }
 }

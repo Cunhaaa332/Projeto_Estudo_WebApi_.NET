@@ -10,6 +10,5 @@ namespace Dominio
         public Guid Id { get; set; }
         public string Nome { get; set; }
 
-        public UsuarioModel usuario { get; set; }
     }
 }

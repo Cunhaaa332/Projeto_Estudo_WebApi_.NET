@@ -17,6 +17,7 @@ using Dados.Usuario;
 using Dominio.Usuario.Repository;
 using Servico.Usuario;
 using Dominio;
+using Dados.Context;
 
 namespace Aplication
 {
@@ -32,16 +33,16 @@ namespace Aplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUsuarioRepository, ApplicationDbContext>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IUserStore<UsuarioModel>, UsuarioRepository>();
             services.AddTransient<IRoleStore<Perfil>, PerfilRepository>();
             services.AddTransient<IUsuarioIdentityManager, UsuarioIdentityManager>();
-
             services.AddTransient<IUsuarioService, UsuarioService>();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<RedeSocialContext>(opt =>
+            {
+                opt.UseSqlServer(Configuration.GetConnectionString("RedeSocialConnection"));
+            });
 
             services.AddIdentity<UsuarioModel, Perfil>()
             .AddDefaultTokenProviders();

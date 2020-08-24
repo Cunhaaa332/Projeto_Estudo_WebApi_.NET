@@ -1,4 +1,5 @@
 ﻿using Dominio.Usuario;
+using Dominio.Usuario.Repository;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Dados.Usuario
 {
-    public class UsuarioRepository : IUserStore<UsuarioModel>
+    public class UsuarioRepository : IUserStore<UsuarioModel>, IUsuarioRepository
     {
         public Task<IdentityResult> CreateAsync(UsuarioModel user, CancellationToken cancellationToken)
         {
